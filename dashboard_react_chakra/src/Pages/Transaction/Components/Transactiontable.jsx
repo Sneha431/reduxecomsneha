@@ -205,40 +205,62 @@ const Transactiontable = () => {
                     display={{ md: "block", xs: "flex", base: "flex" }}
                     justifyContent={"space-between"}
                   >
-                    <GridItem colSpan={{ base: "1", lg: "2" }}>
-                      <Stack>
+                    <GridItem>
+                      <Stack
+                        flexDirection={{ base: "row", md: "column" }}
+                        justifyContent={"space-between"}
+                        gap={{ base: "0", md: "2" }}
+                      >
                         <Heading size="xs" textTransform="uppercase">
                           Date & Time
                         </Heading>
+                        <Flex
+                          justifyContent={"space-between"}
+                          flexDirection={{ base: "row", md: "column" }}
+                          gap={{ base: "3", md: "0" }}
+                        >
+                          <Text fontSize={"sm"} fontWeight={"medium"}>
+                            {" "}
+                            {data.date}{" "}
+                          </Text>
 
-                        <Text fontSize={"sm"} fontWeight={"medium"}>
-                          {" "}
-                          {data.date}{" "}
-                        </Text>
-
-                        <Text color="black.60" fontSize={"xs"}>
-                          {" "}
-                          {data.time}
-                        </Text>
+                          <Text color="black.60" fontSize={"xs"}>
+                            {" "}
+                            {data.time}
+                          </Text>
+                        </Flex>
                       </Stack>
                     </GridItem>
-                    <GridItem colSpan={{ base: "1", lg: "2" }}>
-                      <Stack>
-                        {" "}
+                    <GridItem>
+                      <Stack
+                        flexDirection={{ base: "row", md: "column" }}
+                        justifyContent={"space-between"}
+                        gap={{ base: "0", md: "2" }}
+                        mt="4"
+                      >
                         <Heading size="xs" textTransform="uppercase">
                           Type
                         </Heading>
-                        <Text fontSize={"sm"} fontWeight={"medium"}>
-                          {" "}
-                          {data.type.name}
-                        </Text>
-                        <Text color="black.60" fontSize={"xs"}>
-                          {data.type?.tag}
-                        </Text>
+                        <Flex
+                          justifyContent={"space-between"}
+                          flexDirection={{ base: "row", md: "column" }}
+                          gap={{ base: "3", md: "0" }}
+                        >
+                          <Text fontSize={"sm"} fontWeight={"medium"}>
+                            {data.type.name}
+                          </Text>
+                          <Text color="black.60" fontSize={"xs"}>
+                            {data.type?.tag}
+                          </Text>
+                        </Flex>
                       </Stack>
                     </GridItem>
-                    <GridItem colSpan={{ base: "1", lg: "2" }}>
-                      <Stack>
+                    <GridItem>
+                      <Stack
+                        flexDirection={{ base: "row", md: "column" }}
+                        justifyContent={"space-between"}
+                        mt="4"
+                      >
                         <Heading size="xs" textTransform="uppercase">
                           Amount
                         </Heading>
@@ -249,9 +271,13 @@ const Transactiontable = () => {
                       </Stack>
                     </GridItem>
 
-                    <GridItem colSpan={{ base: "1", lg: "2" }}>
+                    <GridItem>
                       {" "}
-                      <Stack>
+                      <Stack
+                        flexDirection={{ base: "row", md: "column" }}
+                        justifyContent={"space-between"}
+                        mt="4"
+                      >
                         {" "}
                         <Heading size="xs" textTransform="uppercase">
                           Status
