@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-
 import axios from "axios";
 import {
+  Box,
   Button,
   Center,
   Heading,
@@ -9,9 +9,6 @@ import {
   Spinner,
   Table,
   Text,
-} from "@chakra-ui/react";
-import { useTable } from "react-table";
-import {
   Thead,
   Tbody,
   Tfoot,
@@ -20,7 +17,10 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Flex,
 } from "@chakra-ui/react";
+import { useTable, useSortBy } from "react-table";
+import { BiDownArrow, BiUpArrow } from "react-icons/bi";
 
 const url = import.meta.env.VITE_APP_API_URL;
 
@@ -42,7 +42,7 @@ const fetchdata = [
 
 const tableColumn = [
   {
-    Header: "Product List",
+    Header: "Not yet changed",
     columns: [
       {
         Header: "ID",
@@ -51,20 +51,34 @@ const tableColumn = [
       {
         Header: "TITLE",
         accessor: "title",
-      },
-      {
-        Header: "PRICE",
-        accessor: "price",
-        Cell: ({ row }) => `$ ${row.values.price}`,
+        Cell: ({ row }) => (
+          <Box style={{ whiteSpace: "normal" }}>{row.values.title}</Box>
+        ),
       },
       {
         Header: "DESCRIPTION",
         accessor: "description",
+        Cell: ({ row }) => (
+          <Box style={{ whiteSpace: "normal", wordBreak: "normal" }}>
+            {row.values.description}
+          </Box>
+        ),
       },
       {
         Header: "CATEGORY",
         accessor: "category",
       },
+    ],
+  },
+  {
+    Header: "Changed",
+    columns: [
+      {
+        Header: "PRICE",
+        accessor: "price",
+        Cell: ({ row }) => `$${row.values.price}`,
+      },
+
       {
         Header: "IMAGE",
         accessor: "image",
@@ -84,10 +98,13 @@ function App() {
   const columns = useMemo(() => tableColumn, []);
   const data = useMemo(() => products, [products]);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({
-      columns: columns,
-      data: data,
-    });
+    useTable(
+      {
+        columns: columns,
+        data: data,
+      },
+      useSortBy
+    );
 
   useEffect(() => {
     const getdata = async () => {
@@ -111,16 +128,38 @@ function App() {
   }
 
   return (
-    <Heading>
-      React Table
+    <Box>
+      <Heading>React Table</Heading>
       <TableContainer>
-        <Table {...getTableProps()} variant="striped" colorScheme="teal">
+        <Table
+          {...getTableProps()}
+          variant="striped"
+          colorScheme="teal"
+          // __css={{
+          //   tableLayout: "fixed",
+          //   width: "full",
+          // }}
+        >
           <Thead>
             {headerGroups.map((headerGroup, n) => (
               <Tr {...headerGroup.getHeaderGroupProps()} key={n}>
                 {headerGroup.headers.map((column, i) => (
-                  <Th {...column.getHeaderProps()} key={i}>
-                    <Text>{column.render("Header")}</Text>
+                  <Th
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    key={i}
+                  >
+                    <Flex gap={2}>
+                      <Text>{column.render("Header")}</Text>
+                      {column.isSorted ? (
+                        column.isSortedDesc ? (
+                          <BiDownArrow ml={2} />
+                        ) : (
+                          <BiUpArrow ml={2} />
+                        )
+                      ) : (
+                        ""
+                      )}
+                    </Flex>
                   </Th>
                 ))}
               </Tr>
@@ -131,8 +170,8 @@ function App() {
               prepareRow(row);
               return (
                 <Tr {...row.getRowProps()} key={i}>
-                  {row.cells.map((cell, i) => (
-                    <Td {...cell.getCellProps()} key={i}>
+                  {row.cells.map((cell, j) => (
+                    <Td {...cell.getCellProps()} key={j}>
                       <Text>{cell.render("Cell")}</Text>
                     </Td>
                   ))}
@@ -142,7 +181,7 @@ function App() {
           </Tbody>
         </Table>
       </TableContainer>
-    </Heading>
+    </Box>
   );
 }
 
