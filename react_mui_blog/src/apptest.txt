@@ -1,0 +1,17 @@
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from "@mui/material"
+
+
+
+const App = () => {
+  return (
+    <div>
+      <Button color="secondary" variant="contained" endIcon={<DeleteIcon />} s
+        startIcon={<DeleteIcon />} size='small' style={{ backgroundColor: "grey" }}
+        disableRipple disableElevation>Text</Button>
+
+    </div>
+  )
+}
+
+export default App
