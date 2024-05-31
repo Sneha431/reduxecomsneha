@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Array Traversing</title>
+</head>
+
+<body>
+  <script>
+    let traverse_arr = [9, 45, 2, 8, 45, 23, 7, 78, 0, 11, 41, 77];
+    let new_arr = Array(...new Set(traverse_arr)).sort((a, b) => a - b)
+
+    document.write(`Previous array ${new_arr}  </br>`)
+
+
+
+    function getElement(v) {
+
+      let parent = document.getElementById("container");
+
+      let value = parseInt(v);
+      let index = -1;
+      console.log(value);
+      if (typeof (value === "number")) {
+
+        for (let i = 0; i < new_arr.length - 1; i++) {
+          console.log(new_arr[i]);
+          if (new_arr[i] == value) { index = i; break; }
+
+
+        }
+
+
+        if (index != -1) {
+          parent.innerHTML = "Matched";
+
+        }
+        else parent.innerHTML = "Not Matched";
+
+
+      }
+      else { parent.innerHTML = "Not a number"; }
+
+      console.warn(new_arr.indexOf(value))
+
+    }
+  </script>
+
+  <input type="text" id="value" placeholder="value" />
+  <button onclick="getElement(document.getElementById('value').value)">Get</button>
+  <div id="container">
+  </div>
+
+
+</body>
+
+</html>

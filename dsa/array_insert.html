@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>Array Traversing</title>
+</head>
+
+<body>
+  <script>
+    let traverse_arr = [9, 45, 2, 8, 45, 23, 7, 78, 0, 11, 41, 77];
+    const new_arr = Array(...new Set(traverse_arr)).sort((a, b) => a - b)
+
+    document.write(`Previous array ${new_arr}  </br>`)
+
+
+
+    function getElement(v, p) {
+
+      const parent = document.getElementById("container");
+      const value = parseInt(v);
+      const pos = parseInt(p);
+
+      if (typeof (value === "number") && typeof (pos === "number")) {
+
+        for (let index = new_arr.length - 1; index > 0; index--) {
+          if (new_arr[index] != value) {
+            if (index >= pos) {
+              console.log(new_arr)
+              new_arr[index + 1] = new_arr[index];
+              console.log(new_arr)
+              if (index == pos) {
+                new_arr[pos] = value
+              }
+
+            }
+
+            parent.innerHTML = `Array :  ${new_arr}`
+          }
+          else { parent.innerHTML = "Number not found in array"; }
+
+        }
+        //using slice
+        // for (let index = new_arr.length - 1; index > 0; index--) {
+        //   // if (index >= pos) {
+        //   // console.log(new_arr)
+        //   // new_arr[index + 1] = new_arr[index];
+        //   // console.log(new_arr)
+        //   if (index == pos) {
+        //     new_arr.splice(index, 0, value);
+        //     //   }
+
+        //   }
+
+        //   parent.innerHTML = `Array :  ${new_arr}`
+
+        // }
+
+
+
+
+      }
+      else { parent.innerHTML = "Not a number"; }
+
+
+
+    }
+  </script>
+  <input type="text" id="element" placeholder="newElement" />
+  <input type="text" id="pos" placeholder="position" />
+  <button
+    onclick="getElement(document.getElementById('element').value,document.getElementById('pos').value)">Get</button>
+  <div id="container">
+  </div>
+
+
+</body>
+
+</html>
