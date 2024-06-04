@@ -8,14 +8,14 @@ const Restaurantnear = ({ restaurant, title, type, gridtype }) => {
           {title}
         </h1>
         <div
-          className={`grid grid-cols-2 lg:grid-cols-${
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-${
             gridtype ? gridtype + `md:flex-grow md:w-full` : "4"
           } justify-center items-center  text-md space-y-4   mx-7 md:mx-auto  `}
         >
           {restaurant.map((item, index) => (
             <div
               key={index}
-              className="rounded-lg shadow-sm border border-[#02060c1a] text-center mt-4 ml-3  p-2 break-words /*md:line-clamp-1*/ md:overflow-y-auto "
+              className="rounded-lg shadow-sm border border-[#02060c1a] text-left mt-4 ml-3  p-2 break-words /*md:line-clamp-1*/ md:overflow-y-auto "
             >
               Best {type} in {item}
             </div>
