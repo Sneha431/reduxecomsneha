@@ -47,22 +47,24 @@ const Card = (props) => {
           transitionDuration: "800ms",
         }}
       >
-        <img
+        {props.image && <img
           src={`/images/${props.image}`}
           className="h-full w-full object-cover rounded-xl relative "
-        />
+        />}
+
         <div className="absolute z-40 rounded-xl bg-gradient-to-b from-transparent to-gray-800  p-2 w-full h-full top-0 flex items-end text-amber-50 text-xl font-bold uppercase tracking-tighter">
           {" "}
           {props.offer}
         </div>
       </div>
       <div className="font-bold text-xl mt-2">{props.title}</div>
-      <div className="flex gap-1 items-center">
+      {props.minTime && <div className="flex gap-1 items-center">
         <Star className="inline" /> {props.rating}
         <span className="ml-2">
           {props.minTime}-{props.maxTime}mins
         </span>
-      </div>
+      </div>}
+
       <div className="font-normal text-gray-500">
         {" "}
         <p>{props.name}</p>

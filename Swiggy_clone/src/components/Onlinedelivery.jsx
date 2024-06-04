@@ -3,7 +3,7 @@ import Commonheadscroll from "./Commonheadscroll";
 import Card from "./Card";
 import WrapperContainer from "./WrapperContainer";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { BulletList } from "react-content-loader";
+import { BulletList, Instagram } from "react-content-loader";
 const Onlinedelivery = () => {
   const [category, setcategory] = useState([]);
   const [shift, setshift] = useState(0);
@@ -16,22 +16,32 @@ const Onlinedelivery = () => {
         try {
           const response = await fetch("./restaurantChains.json");
           const categorydata = await response.json();
+
+
           resolve(categorydata);
         } catch (error) {
           reject(error);
         }
-      }, 3000);
+      }, 2000);
     });
   };
-
   const fetchcategory = async () => {
     try {
       const categorydata = await fetchcatemore();
+
+      categorydata.length > 0 ? setHasMore(true) : setHasMore(false);
       setcategory([...category, ...categorydata]);
+
     } catch (error) {
       console.error("Error fetching category data:", error);
     }
   };
+
+  useEffect(() => {
+
+    fetchcategory();
+  }, []);
+
 
   const nextshift = () => {
     console.log(category.length - shift);
@@ -48,9 +58,15 @@ const Onlinedelivery = () => {
     function onscroll() {
       const element = elementref.current && elementref.current;
       const rect = element.getBoundingClientRect();
+
       setTop(rect.top <= 0);
     }
+
     window.addEventListener("scroll", onscroll);
+    return () => {
+      window.removeEventListener("scroll", onscroll);
+    };
+
   }, []);
 
   return (
@@ -64,11 +80,10 @@ const Onlinedelivery = () => {
         orientationbtntb={false}
       />
       <div
-        className={`${
-          isTop
-            ? "mx-auto fixed top-0 z-[40] bg-white w-full left-0 p-[15px] shadow-lg  text-[#3d4152] duration-100"
-            : "mt-2 ml-8"
-        }`}
+        className={`${isTop
+          ? "mx-auto fixed top-0 z-[999999] bg-white w-full left-0 p-[15px] shadow-lg  text-[#3d4152] duration-100"
+          : "mt-2 ml-8"
+          }`}
       >
         <div className="flex grow gap-3">
           <div className="p-3 rounded-xl shadow">Filter</div>
@@ -84,7 +99,19 @@ const Onlinedelivery = () => {
           dataLength={category.length}
           next={fetchcategory} // Function to call when more data needs to be loaded
           hasMore={hasMore} // Boolean to indicate if more data is available
-          loader={<BulletList className="ml-7" />} // Loader component
+          loader={
+            <>
+              <WrapperContainer>
+                <BulletList className="w-full" />
+                <div className="flex gap-2">
+
+                  <Card />
+                  <Card />
+                  <Card />
+                  <Card />
+
+                </div></WrapperContainer></>
+          }// Loader component
           endMessage={<p>No more items</p>} // Message to display when all data is loaded
         >
           {category.map((cat, index) => (
