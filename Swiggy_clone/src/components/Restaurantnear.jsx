@@ -8,7 +8,7 @@ const Restaurantnear = ({ restaurant, title, type, gridtype }) => {
           {title}
         </h1>
         <div
-          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-${
+          className={`grid grid-cols-2  lg:grid-cols-${
             gridtype ? gridtype + `md:flex-grow md:w-full` : "4"
           } justify-center items-center  text-md space-y-4   mx-7 md:mx-auto  `}
         >
