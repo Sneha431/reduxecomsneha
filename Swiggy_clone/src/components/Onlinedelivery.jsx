@@ -17,7 +17,6 @@ const Onlinedelivery = () => {
           const response = await fetch("./restaurantChains.json");
           const categorydata = await response.json();
 
-
           resolve(categorydata);
         } catch (error) {
           reject(error);
@@ -31,17 +30,14 @@ const Onlinedelivery = () => {
 
       categorydata.length > 0 ? setHasMore(true) : setHasMore(false);
       setcategory([...category, ...categorydata]);
-
     } catch (error) {
       console.error("Error fetching category data:", error);
     }
   };
 
   useEffect(() => {
-
     fetchcategory();
   }, []);
-
 
   const nextshift = () => {
     console.log(category.length - shift);
@@ -66,7 +62,6 @@ const Onlinedelivery = () => {
     return () => {
       window.removeEventListener("scroll", onscroll);
     };
-
   }, []);
 
   return (
@@ -80,10 +75,11 @@ const Onlinedelivery = () => {
         orientationbtntb={false}
       />
       <div
-        className={`${isTop
-          ? "mx-auto fixed top-0 z-[999999] bg-white w-full left-0 p-[15px] shadow-lg  text-[#3d4152] duration-100"
-          : "mt-2 ml-8"
-          }`}
+        className={`${
+          isTop
+            ? "mx-auto fixed top-0 z-[999999] bg-white w-full left-0 p-[15px] shadow-lg  text-[#3d4152] duration-100"
+            : "mt-2 ml-8"
+        }`}
       >
         <div className="flex grow gap-3">
           <div className="p-3 rounded-xl shadow">Filter</div>
@@ -92,7 +88,7 @@ const Onlinedelivery = () => {
       </div>
       <div ref={elementref}>
         <InfiniteScroll
-          className="grid grid-cols-1 md:grid-cols-4 w-full overflow-hidden"
+          className="grid  grid-cols-1 md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 w-full overflow-hidden md:ml-4"
           style={{
             overflowX: "hidden",
           }}
@@ -104,18 +100,18 @@ const Onlinedelivery = () => {
               <WrapperContainer>
                 <BulletList className="w-full" />
                 <div className="flex gap-2">
-
                   <Card />
                   <Card />
                   <Card />
                   <Card />
-
-                </div></WrapperContainer></>
-          }// Loader component
+                </div>
+              </WrapperContainer>
+            </>
+          } // Loader component
           endMessage={<p>No more items</p>} // Message to display when all data is loaded
         >
           {category.map((cat, index) => (
-            <Card {...cat} key={index} shift={shift} />
+            <Card {...cat} key={index} shift={shift} itemname={true} />
           ))}
         </InfiniteScroll>
       </div>

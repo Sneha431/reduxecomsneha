@@ -39,37 +39,43 @@ const Card = (props) => {
     );
   };
   return (
-    <div className="cursor-pointer hover:scale-95 duration-300 mt-[10px] w-full mx-2 md:ml-8 ">
+    <div className="cursor-pointer hover:scale-95 duration-300 mt-[10px] w-full text-center">
       <div
-        className="h-[182px]  w-[360px]  md:w-[273px] text-md shadow-lg relative duration[800ms]"
+        className="h-[182px]  w-[360px]  md:w-[273px] text-md shadow-lg relative duration[800ms] rounded-xl mx-auto px-auto"
         style={{
           transform: `translateX(-${props.shift * 100}%)`,
           transitionDuration: "800ms",
         }}
       >
-        {props.image && <img
-          src={`/images/${props.image}`}
-          className="h-full w-full object-cover rounded-xl relative "
-        />}
+        {props.image && (
+          <img
+            src={`/images/${props.image}`}
+            className="h-full w-full object-cover rounded-xl relative "
+          />
+        )}
 
         <div className="absolute z-40 rounded-xl bg-gradient-to-b from-transparent to-gray-800  p-2 w-full h-full top-0 flex items-end text-amber-50 text-xl font-bold uppercase tracking-tighter">
           {" "}
           {props.offer}
         </div>
       </div>
-      <div className="font-bold text-xl mt-2">{props.title}</div>
-      {props.minTime && <div className="flex gap-1 items-center">
-        <Star className="inline" /> {props.rating}
-        <span className="ml-2">
-          {props.minTime}-{props.maxTime}mins
-        </span>
-      </div>}
+      {props.itemname && (
+        <>
+          <div className="font-bold text-xl mt-2 ">{props.title}</div>
+          <div className="flex gap-1 items-center justify-center">
+            <Star className="inline " /> {props.rating}
+            <span className="ml-2">
+              {props.minTime}-{props.maxTime}mins
+            </span>
+          </div>
 
-      <div className="font-normal text-gray-500">
-        {" "}
-        <p>{props.name}</p>
-        <p>{props.place}</p>
-      </div>
+          <div className="font-normal text-gray-500">
+            {" "}
+            <p>{props.name}</p>
+            <p>{props.place}</p>
+          </div>
+        </>
+      )}
     </div>
   );
 };

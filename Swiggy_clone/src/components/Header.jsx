@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiCaretDownBold } from "react-icons/pi";
 import { FiSearch } from "react-icons/fi";
 import { CiDiscount1 } from "react-icons/ci";
@@ -6,7 +6,11 @@ import { GrCart } from "react-icons/gr";
 import { IoIosHelpCircle } from "react-icons/io";
 import { BsBox2Fill } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
-import { RiMenuFill } from "react-icons/ri";
+import {
+  RiArrowDownDoubleFill,
+  RiArrowUpDoubleFill,
+  RiMenuFill,
+} from "react-icons/ri";
 import { CiGps } from "react-icons/ci";
 import Commonsidebar from "./Commonsidebar";
 import { MdOutlineWatchLater } from "react-icons/md";
@@ -45,6 +49,14 @@ const Header = () => {
       name: "Cart",
     },
   ];
+  const headref = useRef();
+
+  const gotop = (e) => {
+    e.preventDefault();
+    console.log(headref);
+    headref.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <>
       {/* https://stackoverflow.com/questions/5963669/whats-the-difference-between-event-stoppropagation-and-event-preventdefault */}
@@ -122,7 +134,14 @@ const Header = () => {
           </nav>
         </Commonsidebar>
       )}
+      <button
+        className="bg-gray-400 fixed bottom-3 right-12 mr-5 rounded-full p-3  text-gray-800 z-[9999999]"
+        onClick={gotop}
+      >
+        <RiArrowUpDoubleFill className="size-5" />
+      </button>
 
+      <div ref={headref}></div>
       <header className="p-[15px] shadow-lg  text-[#3d4152] fixed w-full bg-white top-0 z-[40]">
         <div className="mx-auto max-w-[1200px]  flex items-center gap-10 ">
           <div className="w-8">

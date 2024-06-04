@@ -1,10 +1,10 @@
 import React from "react";
 
-const Footerdown = () => {
+const Footerdown = ({ footref }) => {
   return (
-    <div className="bg-slate-950 py-12 md:grid  md:grid-cols-9 justify-items-center text-white px-12 md:px-36 space-y-5 md:space-y-0">
+    <div className="bg-slate-950 py-12  lg:grid  lg:grid-cols-9 justify-items-center text-white px-12 lg:px-36 space-y-5 lg:space-y-0">
       <div className="rounded-lg p-2 flex flex-col gap-2 space-x-0 justify-items-center col-span-4">
-        <div className="flex gap-2">
+        <div className="flex gap-2" ref={footref}>
           {" "}
           <img
             src="/images/swiggy-logo.png"
@@ -46,8 +46,8 @@ const Footerdown = () => {
           <li>Lorem</li>
         </ul>
       </div>
-      <div className="md:col-span-9 ">
-        <h1 className="text-lg text-white font-semibold md:mt-11">Company</h1>
+      <div className="lg:col-span-9 ">
+        <h1 className="text-lg text-white font-semibold lg:mt-11">Company</h1>
         <ul>
           <li>Lorem</li>
           <li>Lorem</li>

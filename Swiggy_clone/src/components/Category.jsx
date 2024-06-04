@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import WrapperContainer from "./WrapperContainer";
 
 import Commonheadscroll from "./Commonheadscroll";
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import { jsx, css } from "@emotion/react";
+import { RiArrowUpDoubleFill } from "react-icons/ri";
 
 const Category = () => {
   const [category, setcategory] = useState([]);
@@ -41,6 +42,7 @@ const Category = () => {
       transitionDuration: "700ms",
     },
   });
+
   return (
     <WrapperContainer>
       <Commonheadscroll
@@ -53,6 +55,7 @@ const Category = () => {
         margin={true}
         orientationbtntb={true}
       />
+
       <div className="grid grid-flow-row grid-cols-3 h-[190px] md:h-[120px] md:flex overflow-hidden mx-6  md:mx-0">
         {category.map((cat) => (
           <div
