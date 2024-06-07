@@ -10,7 +10,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
 
         <Route
-          path="/add"
+          path="/:param"
           element={
             <ChakraProvider>
               <AddEmp />
